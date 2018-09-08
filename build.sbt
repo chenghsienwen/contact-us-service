@@ -9,7 +9,7 @@ name := "ContactUsService"
 
 organization := "com.htc"
 
-version := "0.0.1-SNAPSHOT"
+version := "0.0.2"
 
 scalaVersion := "2.12.6"
 
@@ -43,6 +43,11 @@ scalafmtOnCompile := true
 autoCompilerPlugins := true
 addCompilerPlugin("com.criteo.socco" %% "socco-plugin"       % "0.1.9")
 addCompilerPlugin("com.olegpy"       %% "better-monadic-for" % "0.2.4")
+
+herokuAppName in Compile := "contact-us-finatra"
+herokuProcessTypes in Compile := Map(
+  "web" -> "target/universal/stage/bin/contactusservice -Dcom.twitter.finatra.config.port=:$PORT"
+)
 
 lazy val versions = new {
   val finatra        = "18.5.0"

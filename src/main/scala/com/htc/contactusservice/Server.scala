@@ -19,7 +19,7 @@ class Server extends HttpServer {
   override def jacksonModule     = CustomJacksonModule
   override protected def modules = Seq(ServiceSwaggerModule)
 
-  override def defaultFinatraHttpPort = getConfig[String]("FINATRA_HTTP_PORT").fold(":8888")(x => p":$x")
+  override def defaultFinatraHttpPort = sys.env.get("PORT").fold(":9999")(x => s":$x") //
   override val name                   = getClass.getPackage.getImplementationTitle
 
   override def configureHttp(router: HttpRouter): Unit =
